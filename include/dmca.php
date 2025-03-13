@@ -329,5 +329,3 @@ $finalHTML = simpleMarkdownToHTML($dmcaText);
 // 3️⃣ HTML ausgeben
 echo "<div class='markdown-content'>$finalHTML</div>";
 ?>
-
-<?php include_once 'include/footer.php'; ?>
