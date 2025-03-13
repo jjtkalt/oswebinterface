@@ -6,6 +6,7 @@ oswebinterface
     Setup opensim/bin/Robust.HG.ini
 
   ---
+## Robust Setup
 
     MapTileURL = "${Const|BaseURL}:${Const|PublicPort}/oswebinterface/maptile.php";
     SearchURL = "${Const|BaseURL}:${Const|PublicPort}/oswebinterface/searchservice.php";
