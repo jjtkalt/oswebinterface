@@ -2,6 +2,7 @@
 
 ### German:
 **OpenSimulator Viewer Webinterface:**
+
 Dieses Webinterface dient ausschließlich dazu, die Kommunikationslücke zwischen dem OpenSimulator und dem Viewer, wie beispielsweise Firestorm, zu schließen. 
 Es ermöglicht eine nahtlose Interaktion und erleichtert die Verwaltung und Steuerung der virtuellen Umgebung direkt über den Viewer.
 
@@ -13,6 +14,7 @@ Diese Tools sind besonders nützlich für Benutzer, die keine tiefergehenden tec
 
 ### English:
 **OpenSimulator Viewer Webinterface:**  
+
 This web interface is exclusively designed to bridge the communication gap between OpenSimulator and the viewer, such as Firestorm.  
 It enables seamless interaction and simplifies the management and control of the virtual environment directly through the viewer.  
 
@@ -24,6 +26,7 @@ These tools are particularly useful for users who do not have in-depth technical
 
 ### Spanish:
 **Interfaz web del visor de OpenSimulator:**  
+
 Esta interfaz web está diseñada exclusivamente para cerrar la brecha de comunicación entre OpenSimulator y el visor, como por ejemplo Firestorm.  
 Permite una interacción fluida y facilita la gestión y el control del entorno virtual directamente a través del visor.  
 
@@ -35,6 +38,7 @@ Estas herramientas son especialmente útiles para usuarios que no tienen conocim
 
 ### French:
 **Interface web du viewer OpenSimulator :**  
+
 Cette interface web est exclusivement conçue pour combler le fossé de communication entre OpenSimulator et le viewer, tel que Firestorm.  
 Elle permet une interaction fluide et facilite la gestion et le contrôle de l'environnement virtuel directement via le viewer.  
 
