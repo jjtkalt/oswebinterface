@@ -63,7 +63,7 @@ mais qui souhaitent travailler efficacement avec la plateforme.
     GridSearch = "${Const|BaseURL}/oswebinterface/gridsearch.php";
     MessageURI = ${Const|BaseURL}/oswebinterface/messages.php
     welcome = ${Const|BaseURL}/oswebinterface/welcomesplashpage.php
-    economy = ${Const|BaseURL}:8008/
+    economy = ${Const|BaseURL}:8008/; Download, compile and install Moneyserver from here: https://github.com/ManfredAabye/opensimcurrencyserver-dotnet
     about = ${Const|BaseURL}/oswebinterface/aboutinformation.php
     register = ${Const|BaseURL}/oswebinterface/createavatar.php
     help = ${Const|BaseURL}/oswebinterface/help.php
