@@ -5,8 +5,6 @@ session_start();
 $title = "Event Editor Service";
 include_once 'include/header.php';
 
-//$registration_passwords_events = ["1by55dr60kJlSg2z", "BCBFVSHjIoCcPCSV", "MUA0gl4joDRR5CAE", "0pbmLUzXtvzld8vO", "bFMS1LbJIIr08zxv"];
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input_password = $_POST['password'] ?? '';
 
