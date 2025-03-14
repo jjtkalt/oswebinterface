@@ -1,13 +1,20 @@
 <?php
 // Passwortschutz
 session_start();
-$password = 'dein_passwort'; // Ändere dieses Passwort
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
-    if ($_POST['password'] === $password) {
+$title = "Event Editor Service";
+include_once 'include/header.php';
+
+//$registration_passwords_events = ["1by55dr60kJlSg2z", "BCBFVSHjIoCcPCSV", "MUA0gl4joDRR5CAE", "0pbmLUzXtvzld8vO", "bFMS1LbJIIr08zxv"];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $input_password = $_POST['password'] ?? '';
+
+    // Überprüfen des Passworts
+    if (in_array($input_password, $registration_passwords_events)) {
         $_SESSION['authenticated'] = true;
     } else {
-        echo "<script>alert('Falsches Passwort.');</script>";
+        $error_message = "Falsches Passwort. Bitte versuchen Sie es erneut.";
     }
 }
 
