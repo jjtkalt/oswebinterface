@@ -2,7 +2,7 @@
 $title = "Guide";
 include_once "include/config.php";
 
-// Fehlerbehandlung für die JSON-Datei
+// Fehlerbehandlung für die erste JSON-Datei
 $json = file_get_contents('include/destinations.json');
 if ($json === false) {
     die('Fehler beim Laden der JSON-Datei.');
@@ -10,6 +10,16 @@ if ($json === false) {
 $data = json_decode($json, true);
 if (json_last_error() !== JSON_ERROR_NONE) {
     die('Fehler beim Dekodieren der JSON-Datei.');
+}
+
+// Fehlerbehandlung für die zweite JSON-Datei (OSW)
+$oswJson = file_get_contents('include/oswdestinations.json');
+if ($oswJson === false) {
+    die('Fehler beim Laden der OSW-JSON-Datei.');
+}
+$oswData = json_decode($oswJson, true);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    die('Fehler beim Dekodieren der OSW-JSON-Datei.');
 }
 
 // Datenbankverbindung mit Fehlerbehandlung
@@ -32,7 +42,7 @@ if (mysqli_connect_errno()) {
     .list-container { display: none; justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; gap: 10px; border-radius: 5px;}
     .grid-container { display: none; flex-wrap: wrap; gap: 10px; justify-content: center; border-radius: 5px;}
 
-    .region-box { background: <?= HEADER_COLOR ?>; padding: 10px; border-radius: 5px; display: flex; align-items: center; color: <?= PRIMARY_COLOR ?>; }
+    .region-box { background: <?= HEADER_COLOR ?>; padding: 12px; border-radius: 5px; display: flex; align-items: center; color: <?= PRIMARY_COLOR ?>; }
     .region-icon { margin-right: 5px; font-size: 16px; color: <?= PRIMARY_COLOR ?>; }
 
     .grid-item { width: 23%; padding: 10px; border: 1px solid #aaa; background: <?= HEADER_COLOR ?>; text-align: center; border-radius: 5px; color: <?= PRIMARY_COLOR ?>; }
@@ -52,9 +62,10 @@ if (mysqli_connect_errno()) {
 
     <!-- Auswahl Buttons -->
     <div class="button-container">
-        <button onclick="showJSON()">Regionsliste JSON</button>
-        <button onclick="showDatabase()">Regionsliste Database</button>
-        <button onclick="showGridList()">Gridliste CSV</button>
+        <button onclick="showJSON()">Region list</button>
+        <button onclick="showOSWJSON()">Top 100</button>
+        <button onclick="showDatabase()">Home Region List</button>
+        <button onclick="showGridList()">Hypergrid list</button>
     </div>
 
     <!-- ##########################  JSON-Regionsliste ######################################## -->
@@ -77,8 +88,29 @@ if (mysqli_connect_errno()) {
     </div>
 
 
+
+    <!-- ##########################  OSW-JSON-Regionsliste ######################################## -->
+    <div id="oswJsonList" class="guidebody" style="display: <?= (GRIDLIST_VIEW == 'json') ? 'flex' : 'none' ?>; flex-wrap: wrap; gap: 10px; justify-content: flex-start; border-radius: 5px; padding: 10px;">
+        <?php foreach ($oswData as $category => $destinations): ?>
+            <fieldset style='flex: 1; min-width: 250px; max-width: 350px;'>
+                <legend><?= htmlspecialchars(ucfirst($category)) ?></legend>
+                <div class='region-container' style='display: flex; flex-wrap: wrap; gap: 10px; border-radius: 5px; padding: 10px;'>
+                    <?php foreach ($destinations as $destination): ?>
+                        <div class="region-box">
+                            <a href="<?= htmlspecialchars($destination['url']) ?>" target="_blank">
+                                <img src="<?= htmlspecialchars($destination['image']) ?>" alt="<?= htmlspecialchars($destination['name']) ?>" width="50" height="50" style="border-radius:5px; margin-right:10px; padding: 10px;">
+                        </a>
+                        <span><?= htmlspecialchars($destination['name']) ?></span>
+                    </div>
+                <?php endforeach; ?>
+                </div>
+            </fieldset>
+        <?php endforeach; ?>
+    </div>
+
+
+
     <!-- ########################################  Datenbank-Regionsliste ######################################## -->
-     <!-- todo: Abstand hinzufügen. -->
     <div id="databaseList" class="list-container" style="padding: 10px; display: <?= (GRIDLIST_VIEW == 'database') ? 'flex' : 'none' ?>;">
         <?php
         $sql = "SELECT regionName, serverIP, serverPort FROM regions ORDER BY last_seen DESC LIMIT 10";
@@ -96,7 +128,7 @@ if (mysqli_connect_errno()) {
             // Button mit Regionsname
             echo "<button style='margin-bottom: 5px;'>$region</button>";
             // Button mit "Hop"
-            echo "<a href='$regionslink' class='hop-button' target='_blank' style='text-align: center;'>Hop $region</a>";
+            echo "<a href='$regionslink' class='hop-button' target='_blank' style='text-align: center;'><span style='color: rgb(144, 238, 144);'>Hop: </span> $region</a>";
             echo '</div>';
         }
 
@@ -112,7 +144,7 @@ if (mysqli_connect_errno()) {
     <div id="gridList" class="grid-container" style="display: <?= (GRIDLIST_VIEW == 'grid') ? 'flex' : 'none' ?>;">
         <div class="search-bar">
         <p>Search</p>
-            <input type="text" id="searchInput" onkeyup="filterGrids()" placeholder="Suche nach Grids...">            
+            <input type="text" id="searchInput" onkeyup="filterGrids()" placeholder="Search for grids...">            
         </div>
         <?php
         if (($handle = fopen(GRIDLIST_FILE, "r")) !== false) {
@@ -132,8 +164,8 @@ if (mysqli_connect_errno()) {
                 echo '<div class="grid-item">';
                 echo "<span>$gridName</span>";
                 echo '<div class="hop-buttons">';
-                echo "<a href='$gridlink1' class='grid-link' target='_blank' style='width: 60%; text-align: center;'>Viewer Grid Eintrag</a>";
-                echo "<a href='$gridlink2' class='grid-link' target='_blank' style='width: 100%; text-align: center;'>Hop $gridName</a>";
+                echo "<a href='$gridlink1' class='grid-link' target='_blank' style='width: 60%; text-align: center;'><span style='color: rgb(251, 255, 0);'>Viewer registration</a>";
+                echo "<a href='$gridlink2' class='grid-link' target='_blank' style='width: 100%; text-align: center;'><span style='color: rgb(144, 238, 144);'>Hop to:</span> $gridName</a>";
                 echo '</div>';
                 echo '</div>';
             }
@@ -152,18 +184,28 @@ if (mysqli_connect_errno()) {
 
         function showJSON() {
             document.getElementById('jsonList').style.display = 'flex';
+            document.getElementById('oswJsonList').style.display = 'none';
+            document.getElementById('databaseList').style.display = 'none';
+            document.getElementById('gridList').style.display = 'none';
+        }
+
+        function showOSWJSON() {
+            document.getElementById('jsonList').style.display = 'none';
+            document.getElementById('oswJsonList').style.display = 'flex';
             document.getElementById('databaseList').style.display = 'none';
             document.getElementById('gridList').style.display = 'none';
         }
 
         function showDatabase() {
             document.getElementById('jsonList').style.display = 'none';
+            document.getElementById('oswJsonList').style.display = 'none';
             document.getElementById('databaseList').style.display = 'flex';
             document.getElementById('gridList').style.display = 'none';
         }
 
         function showGridList() {
             document.getElementById('jsonList').style.display = 'none';
+            document.getElementById('oswJsonList').style.display = 'none';
             document.getElementById('databaseList').style.display = 'none';
             document.getElementById('gridList').style.display = 'flex';
         }
@@ -171,6 +213,8 @@ if (mysqli_connect_errno()) {
         document.addEventListener('DOMContentLoaded', () => {
             <?php if (GRIDLIST_VIEW == 'json'): ?>
                 showJSON();
+            <?php elseif (GRIDLIST_VIEW == 'oswjson'): ?>
+                showOSWJSON();
             <?php elseif (GRIDLIST_VIEW == 'database'): ?>
                 showDatabase();
             <?php elseif (GRIDLIST_VIEW == 'grid'): ?>
