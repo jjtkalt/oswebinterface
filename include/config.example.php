@@ -172,8 +172,8 @@ define('TILE_SIZE', '25px'); // Größe der Farbfelder / Size of color fields
 
 // Zentrum des Grids
 // Center of the grid
-define('CONF_CENTER_COORD_X', 5500); // X-KOORDINATE DES ZENTRUMS / X coordinate of the center
-define('CONF_CENTER_COORD_Y', 5500); // Y-KOORDINATE DES ZENTRUMS / Y coordinate of the center
+define('CONF_CENTER_COORD_X', 3000); // X-KOORDINATE DES ZENTRUMS / X coordinate of the center
+define('CONF_CENTER_COORD_Y', 3000); // Y-KOORDINATE DES ZENTRUMS / Y coordinate of the center
 
 define('MAPS_X', 32); // Anzahl der Kacheln in X-Richtung / Number of tiles in X direction
 define('MAPS_Y', 32); // Anzahl der Kacheln in Y-Richtung / Number of tiles in Y direction
