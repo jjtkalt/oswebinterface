@@ -10,6 +10,10 @@ Das normale Webinterface wird in der Regel separat installiert und bietet zusät
 Mittlerweile gibt es hierfür einige ansprechende und benutzerfreundliche Lösungen, die die Administration und Konfiguration des Systems erheblich vereinfachen. 
 Diese Tools sind besonders nützlich für Benutzer, die keine tiefergehenden technischen Kenntnisse besitzen, aber dennoch effizient mit der Plattform arbeiten möchten.
 
+Für das osWebinterface ist keine Domain erforderlich – eine einfache IP-Adresse genügt, genau wie beim OpenSimulator selbst. Das Interface lässt sich ohnehin nicht direkt über einen normalen Aufruf im Browser öffnen.
+Natürlich wirkt eine eigene Domain ansprechender und professioneller, und sie ist heutzutage auch recht kostengünstig.
+Das osWebinterface wurde so gestaltet, dass es sich problemlos in gängige CMS-Systeme wie WordPress oder Joomla integrieren lässt – beispielsweise als Custom HTML Block, iFrame, Embed Block oder sogar als eigenständige Seite.
+
 ---
 
 ### English:
