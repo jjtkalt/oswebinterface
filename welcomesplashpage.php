@@ -68,12 +68,12 @@ include_once "include/config.php";
     <!-- Statistik -->
     <div id='stats1' class="info-box">
         <fieldset>
-            <legend>📊 Statistik</legend>
+            <legend>📊 Statistics</legend>
             <?php
             $con = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
             if (!$con) {
-                echo "<b style='color: red;'>❌ Grid ist OFFLINE</b>";
+                echo "<b style='color: red;'>❌ Grid is OFFLINE</b>";
             } else {
                 $totalUsers = mysqli_fetch_row(mysqli_query($con, "SELECT COUNT(*) FROM Presence"))[0];
                 $totalRegions = mysqli_fetch_row(mysqli_query($con, "SELECT COUNT(*) FROM regions"))[0];
@@ -81,12 +81,12 @@ include_once "include/config.php";
                 $activeUsers = mysqli_fetch_row(mysqli_query($con, "SELECT COUNT(*) FROM GridUser WHERE Login > (UNIX_TIMESTAMP() - (30*86400))"))[0];
                 $totalGridAccounts = mysqli_fetch_row(mysqli_query($con, "SELECT COUNT(*) FROM GridUser"))[0];
 
-                echo "<b>Nutzer im Grid:</b> $totalUsers<br>";
-                echo "<b>Regionen:</b> $totalRegions<br>";
-                echo "<b>Aktiv (30 Tage):</b> $activeUsers<br>";
-                echo "<b>Inworld Nutzer:</b> $totalAccounts<br>";
-                echo "<b>HG Grid Nutzer:</b> $totalGridAccounts<br>";
-                echo "<b style='color: green;'>✔ Grid ist ONLINE</b>";
+                echo "<b>Users in Grid:</b> $totalUsers<br>";
+                echo "<b>Total Regions:</b> $totalRegions<br>";
+                echo "<b>Active Users (30 Days):</b> $activeUsers<br>";
+                echo "<b>Users Inworld:</b> $totalAccounts<br>";
+                echo "<b>HG Grid Users:</b> $totalGridAccounts<br>";
+                echo "<b style='color: green;'>✔ Grid is ONLINE</b>";
 
                 mysqli_close($con);
             }
@@ -97,7 +97,7 @@ include_once "include/config.php";
     <!-- Regionsliste -->
     <div id='regionslist' class="info-box">
         <fieldset>
-            <legend>🌍 Regionen</legend>
+            <legend>🌍 Regions</legend>
             <?php
             $con = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
             $sql = "SELECT regionName, serverIP, serverPort FROM regions ORDER BY last_seen DESC LIMIT 10";
@@ -123,7 +123,7 @@ include_once "include/config.php";
 <?php if (SHOW_DAILY_UPDATE) { ?>
     <div id='dailyupdatelist' class="daily-box">
         <fieldset>
-            <legend>🌟 <?php echo SITE_NAME; ?> Aktuell</legend>
+            <legend>🌟 <?php echo SITE_NAME; ?></legend>
             <div class="card" id="daily-update">
                 <?php if (DAILY_UPDATE_TYPE === 'text') { ?>
                     <p><?php echo DAILYTEXT; ?></p>
@@ -133,7 +133,7 @@ include_once "include/config.php";
                     $feedcache_max_age = FEED_CACHE_MAX_AGE;
                     $feed_urls = [RSS_FEED_URL];
 
-                    // Prüfen, ob Cache neu geladen werden muss
+                    // Check if cache needs to be reloaded
                     if (!file_exists($feedcache_path) or filemtime($feedcache_path) < (time() - $feedcache_max_age)) {
                         $output = '';
 
@@ -142,14 +142,14 @@ include_once "include/config.php";
                             $xml = @simplexml_load_string(file_get_contents($feed_url));
 
                             if (!$xml) {
-                                $output .= "<p>Fehler beim Laden des Feeds: <strong>" . htmlspecialchars($feed_url) . "</strong></p>";
+                                $output .= "<p>Error loading feed: <strong>" . htmlspecialchars($feed_url) . "</strong></p>";
                                 continue;
                             }
 
                             $output .= '<h2>' . htmlspecialchars($xml->channel->title) . '</h2>';
                             //$output .= '<p><a href="' . htmlspecialchars($xml->channel->link) . '">Feed öffnen</a></p>';
 
-                            // Nur den neuesten Eintrag anzeigen
+                            // Show only the most recent entry
                             $entry = $xml->channel->item[0];
                             $date = date('d.m.Y', strtotime($entry->pubDate));
                             $title = htmlspecialchars($entry->title);

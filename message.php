@@ -10,12 +10,14 @@ if (MOTD === 'Dyn') {
     // Dynamische MOTD
     $hour = date('H');
     if ($hour < 12) {
-        $greeting = "Guten Morgen";
+        $greeting = "Good morning";
+    } else if ($hour < 17) {
+        $greeting = "Good afternoon";
     } else {
-        $greeting = "Guten Tag";
+        $greeting = "Good evening";
     }
     $message = [
-        "message" => "$greeting auf " . SITE_NAME . "! Bitte beachte unsere Regeln und Richtlinien.",
+        "message" => "$greeting and welcome to " . SITE_NAME . "!  Please take note of our rules.",
         "type" => "system",
         "url_tos" => BASE_URL . "/include/tos.php",
         "url_dmca" => BASE_URL . "/include/dmca.php"

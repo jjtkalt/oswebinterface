@@ -21,11 +21,11 @@ function generateActivationCode() {
 }
 
 function sendVerificationEmail($email, $vorname, $nachname, $activationCode) {
-    $subject = "Ihr Freischaltcode für " . SITE_NAME;
-    $message = "Hallo $vorname $nachname,\n\n";
-    $message .= "Ihr Freischaltcode lautet: $activationCode\n\n";
-    $message .= "Bitte verwenden Sie diesen Code, um Ihre Registrierung abzuschließen.\n\n";
-    $message .= "Mit freundlichen Grüßen,\n";
+    $subject = "Your activation code for " . SITE_NAME;
+    $message = "Hello $vorname $nachname,\n\n";
+    $message .= "Your activation code is: $activationCode\n\n";
+    $message .= "Please use this code to complete your registration.\n\n";
+    $message .= "Welcome to the grid!  Sincerely,\n";
     $message .= SITE_NAME;
 
     $headers = "From: noreply@" . parse_url(BASE_URL, PHP_URL_HOST) . "\r\n";
@@ -47,59 +47,59 @@ function generateUUID() {
 $showCard1 = true; // Standardmäßig Card1 anzeigen
 $showCard2 = false; // Card2 standardmäßig ausblenden
 
-// Überprüfen, ob das Formular abgesendet wurde
+// Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["generateCode"])) {
-        // Verifizierungscode generieren und per E-Mail senden
+        // Generate verification code and send it by email
         $osVorname = trim($_POST["osVorname"]);
         $osNachname = trim($_POST["osNachname"]);
 
-        // Werte in der Session speichern
+        // Save values in the session
         $_SESSION['osVorname'] = $osVorname;
         $_SESSION['osNachname'] = $osNachname;
 
         try {
-            // Datenbankverbindung herstellen
+            // Establish database connection
             $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Benutzer anhand von Vorname und Nachname abrufen
+            // Retrieve users by first name and last name
             $statement = $pdo->prepare("SELECT PrincipalID, Email FROM UserAccounts WHERE FirstName = :FirstName AND LastName = :LastName");
             $statement->execute(['FirstName' => $osVorname, 'LastName' => $osNachname]);
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             if (!$user) {
-                echo "Benutzer nicht gefunden.";
+                echo "User not found.";
                 exit;
             }
 
             $email = $user['Email'];
             $principalID = $user['PrincipalID'];
 
-            // Verifizierungscode generieren (als Variable, nicht in der Datenbank speichern)
+            // Generate verification code (as a variable, not stored in the database)
             $activationCode = generateActivationCode();
 
-            // E-Mail an den Benutzer senden
-            $subject = "Ihr Freischaltcode für " . SITE_NAME;
-            $message = "Hallo $osVorname $osNachname,\n\n";
-            $message .= "Ihr Freischaltcode lautet: $activationCode\n\n";
-            $message .= "Bitte verwenden Sie diesen Code, um Ihr Passwort auf " . BASE_URL . " zu ändern.\n\n";
-            $message .= "Mit freundlichen Grüßen,\n";
+            // Send email to user
+            $subject = "Your activation code for " . SITE_NAME;
+            $message = "Hello $osVorname $osNachname,\n\n";
+            $message .= "Your activation code is: $activationCode\n\n";
+            $message .= "Please use this code to reset your password on " . BASE_URL . ".\n\n";
+            $message .= "Best regards\n";
             $message .= SITE_NAME;
 
             $headers = "From: noreply@" . parse_url(BASE_URL, PHP_URL_HOST) . "\r\n";
             $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
             if (mail($email, $subject, $message, $headers)) {
-                echo "Die E-Mail wurde an $email gesendet. Bitte schauen Sie in Ihren E-Mail-Account.";
+                echo "The email was sent to $email. Please check your email account.";
                 $showCard1 = false; // Card1 ausblenden
                 $showCard2 = true;  // Card2 anzeigen
             } else {
-                echo "Fehler beim Senden der E-Mail.";
+                echo "Error sending email.";
             }
 
         } catch (PDOException $e) {
-            echo "Fehler: " . $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
     } else {
         // Passwort ändern
@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newPassword = trim($_POST["newPassword"]);
 
         if (empty($osVorname) || empty($osNachname) || empty($activationCode) || empty($newPassword)) {
-            echo "Bitte füllen Sie alle Felder aus.";
+            echo "Please fill in all fields.";
             exit;
         }
 
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             if (!$user) {
-                echo "Benutzer nicht gefunden.";
+                echo "User not found.";
                 exit;
             }
 
@@ -142,10 +142,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'UUID' => $principalID
             ]);
 
-            echo "Passwort erfolgreich geändert.";
+            echo "Password successfully changed.";
 
         } catch (PDOException $e) {
-            echo "Fehler: " . $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
 
         // Datenbankverbindung schließen
@@ -157,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Passwort ändern</title>
+    <title>Change Password</title>
     <style>
         htmlBody {font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;} 
         .card1, .card2 {
@@ -191,27 +191,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <main>
-    <!-- Card1 zuerst anzeigen -->
+    <!-- Show Card1 first -->
     <div class="card1" style="display: <?php echo $showCard1 ? 'block' : 'none'; ?>;">
         <h2>New Password verify</h2> 
         <form action="" method="post">
-            <label for="osVorname">Vorname:</label>
+            <label for="osVorname">Frist Name:</label>
             <input type="text" name="osVorname" required><br>
-            <label for="osNachname">Nachname:</label>
+            <label for="osNachname">Last Name:</label>
             <input type="text" name="osNachname" required><br>
-            <input type="submit" name="generateCode" value="Freischaltcode senden"><br><br>
+            <input type="submit" name="generateCode" value="Send activation code"><br><br>
         </form>
     </div>
 
-    <!-- Card2 nach dem Senden des Freischaltcodes anzeigen -->
+    <!-- Show Card2 after sending the activation code -->
     <div class="card2" style="display: <?php echo $showCard2 ? 'block' : 'none'; ?>;">
         <h2>New Password now</h2>
         <form action="" method="post">
-            <label for="activationCode">Freischaltcode aus der gesendeten E-Mail:</label>
+            <label for="activationCode">Activation code from the sent email:</label>
             <input type="text" name="activationCode" required><br>
-            <label for="newPassword">Neues Passwort:</label>
+            <label for="newPassword">New Password:</label>
             <input type="password" name="newPassword" required><br>
-            <input type="submit" value="Passwort ändern">
+            <input type="submit" value="Change Password">
         </form>
     </div>
 </main>
