@@ -1,7 +1,5 @@
 # oswebinterface
 
-## German
-
 **OpenSimulator Viewer Webinterface:**
 
 Dieses Webinterface dient ausschließlich dazu, die Kommunikationslücke zwischen dem OpenSimulator und dem Viewer/Client, wie beispielsweise Firestorm, zu schließen.
@@ -67,4 +65,5 @@ Die config.example.php (Config.php) wird in der Config.md ausführlich erklärt.
     GridStatusRSS = ${Const|BaseURL}:${Const|PublicPort}/oswebinterface/gridstatusrss.php
 
   ---
+
   
