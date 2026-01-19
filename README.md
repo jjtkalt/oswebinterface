@@ -37,14 +37,31 @@ Die config.example.php (Config.php) wird in der Config.md ausführlich erklärt.
 
 ## Env.php Setup
 
-  'DB_SERVER', 'localhost' - ändert falls nötig;
-  'DB_USERNAME', 'your_username' - Geben sie hier den Datenbankbenutzer an;
-  'DB_PASSWORD', 'your_password' - Geben sie hier das Datenbankpasswort an;
-  'DB_NAME', 'your_database' - Geben sie hier den Datenbanknamen an;
-  'DB_ASSET_NAME', 'your_database' - Geben sie hier den Assetdatenbanknamen an (kann identisch mit DB_NAME sein);
+Die Datei `env.php` enthält alle sensiblen Zugangsdaten und Umgebungsvariablen für das Webinterface. Sie sollte niemals öffentlich zugänglich sein!
 
-  'REMOTEADMIN_HTTPAUTHUSERNAME', 'opensim' - ändern falls nötig;
-  'REMOTEADMIN_HTTPAUTHPASSWORD', 'opensim123' - ändern falls nötig;
+**Wichtige Einstellungen in env.php:**
+
+- **DB_SERVER**: Adresse des Datenbankservers (meistens `localhost`).
+  > Beispiel: `'DB_SERVER', 'localhost'` – Nur ändern, wenn die Datenbank auf einem anderen Server läuft.
+- **DB_USERNAME**: Benutzername für die Datenbank.
+  > Beispiel: `'DB_USERNAME', 'dein_benutzer'` – Trage hier den MySQL/MariaDB-Benutzernamen ein.
+- **DB_PASSWORD**: Passwort für die Datenbank.
+  > Beispiel: `'DB_PASSWORD', 'dein_passwort'` – Das zugehörige Passwort zum Datenbankbenutzer.
+- **DB_NAME**: Name der Hauptdatenbank.
+  > Beispiel: `'DB_NAME', 'deine_datenbank'` – Hier steht der Name der OpenSim-Datenbank.
+- **DB_ASSET_NAME**: Name der Asset-Datenbank.
+  > Beispiel: `'DB_ASSET_NAME', 'deine_assetdatenbank'` – Kann identisch mit DB_NAME sein, wenn Assets in derselben Datenbank liegen.
+
+- **REMOTEADMIN_HTTPAUTHUSERNAME**: Benutzername für die RemoteAdmin-HTTP-Authentifizierung.
+  > Beispiel: `'REMOTEADMIN_HTTPAUTHUSERNAME', 'opensim'` – Wird für die Kommunikation mit dem OpenSim-Server benötigt.
+- **REMOTEADMIN_HTTPAUTHPASSWORD**: Passwort für die RemoteAdmin-HTTP-Authentifizierung.
+  > Beispiel: `'REMOTEADMIN_HTTPAUTHPASSWORD', 'opensim123'` – Unbedingt ein sicheres Passwort wählen!
+
+**Hinweise:**
+
+- Nach dem Anpassen der Werte die Datei speichern und die Rechte so setzen, dass sie nicht öffentlich im Web erreichbar ist (z.B. chmod 600).
+- Die Zugangsdaten müssen mit denen in der OpenSim-Konfiguration übereinstimmen.
+- Bei Problemen mit der Datenbankverbindung prüfe Benutzername, Passwort und Serveradresse.
 
 ## Robust.ini Setup
 
@@ -65,5 +82,4 @@ Die config.example.php (Config.php) wird in der Config.md ausführlich erklärt.
     GridStatusRSS = ${Const|BaseURL}:${Const|PublicPort}/oswebinterface/gridstatusrss.php
 
   ---
-
   
