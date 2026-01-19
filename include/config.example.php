@@ -54,18 +54,20 @@ define('MEDIA_SERVER_STATUS', 'http://localhost:8500/status-json.xsl'); // Statu
 // Passwörter (unbedingt austauschen!)
 // Passwords (must be changed!)
 // Für das Austauschen der Passwörter könnt ihr den paswd_generator.php benutzen, den ihr im Verzeichnis /include findet.
+// Das ganze ist so angelegt das wenn einer der Administratoren sein Passwort ändert, oder im streit das Grid verlässt nur sein Passwort geändert oder gelöscht werden muss.
 // To change the passwords, you can use paswd_generator.php located in the /include directory.
-$registration_passwords_register = ["VpOM2bHFc6gdqUim", "zMemu5UJuro60nYJ", "cD3pc5JidIYMkTFT", "FBJpMfLHnVXNAncy", "1vyekSHvL3bYDNhT"];
-$registration_passwords_reset = ["eYUzmLO3lWDoEUZA", "ufFG8zJZvOuj6KzM", "tjwggl9ts3o6fCUs", "FYKn70uhJRFy6pum", "jEXqiYewLl6iPTCT"];
-$registration_passwords_partner = ["hBEMpDKEhEiBtMXx", "wtnpTrCSswBVbR9o", "Q9HUnk7BjIvKZ1qN", "YLta8TC4YivhYuMc", "RNhGZaJtCnwq26fs"];
-$registration_passwords_inventory = ["e46D3pp1bTV7qpBg", "VtsCH82rmtPix5AU", "VKY2kFV6qmrd0iHi", "VihXaKyikESI5rTK", "fGN9dUIszXdZJr3v"];
-$registration_passwords_datatable = ["yOu2IxJ8146dS0kY", "y3fycXPplGS6CjY5", "ycwRc0fr2QbZNPqc", "3pTz8Zk6qeYUf2VY", "G10LGqpqs0BjDdEO"];
-$registration_passwords_listinventar = ["IWhMSXFWxwM8Gw4b", "AbzWoKqSDLyKaQXV", "kBFFJTUs2CvVuHIM", "A9VuDk9rTdcSXwLg", "uhArUTWoVY9j5eXi"];
-$registration_passwords_picreader = ["sho8zTi2AXiane0s", "lC0ppkQN44Qxle8z", "yOCTqbHjJGuGSKdh", "efOOM4T8o3h5Vu4o", "snSOrbrvn9le3pG1"];
-$registration_passwords_mutelist = ["YOLrPXUQGPs4VtKC", "svBfxgcGePLmbKxf", "dGZQNZcDmYJXt593", "XTtuHEUtJH5rQzPQ", "crsSbntrL0gFBRwH"];
-$registration_passwords_avatarpicker = ["EugW3d9jU5EPlPqq", "H2sHVvuDf8AMYF6t", "XTTQ4689dMiu8afT", "SWogtvKIpR9Mxozy", "vateDhRqGjIlhyBw"];
-$registration_passwords_economy = ["5MvFSN7kbQ3ydFUl", "EvNywokrdO8NfaAc", "G47u0ppMSyOHEptB", "1cUgVgExxukp8zua", "YRNlhyr5OMObr2na"];
-$registration_passwords_events = ["LvRBVZOGY65deOpS", "FWVBcqNPKUecDK7b", "2JJzb1kv7aQQM9kp", "636pCKpPZSqvDYBP", "aqYicdJdnrnV4Vvw"];
+
+$registration_passwords_register = ["QtCRQI3op5ic6NSN", "7rEmoGwOnYHR4cfd", "v2AdvHsi2zeebqQI", "o4zVxbyEVl99w6Ra", "XfGYyuVJsL2CiSJt"];
+$registration_passwords_reset = ["hyjHuaQ7Pr73xAMd", "52motXset9KLLLFi", "pJQx37OZB01rxylW", "7dYsdPRR8VyoVABJ", "u0JI4PXAIUfZfJkW"];
+$registration_passwords_partner = ["c0OBKlfQQCCwOimv", "oFQXi7agLS1cXW9E", "spqIf1pFYu1z10bM", "nMT5sarhn0um5UaD", "TnvsgAkTrJL3Q3jD"];
+$registration_passwords_inventory = ["JXXGCpo9VkD6Mjvm", "yXQzSWdTF3jP9yy1", "mVrxqd3fWQeiXtoX", "TzXij1p8WnQyYWSi", "rXlT4p12KjY8gGxV"];
+$registration_passwords_datatable = ["DyWOm4b80AVw3y7O", "YB1upJ66yS0QOjlE", "Qei6q0jBiOXvXMPN", "2fjL7cCFxTNgTGoU", "oQCpdh6XI6PU5K7a"];
+$registration_passwords_listinventar = ["PXtpk9RkR1h652SV", "WK3XlAzXL0DiAkA7", "Q9vBCT2gHtNAlCnB", "ZDTZ8NnR0cGBDqCs", "BZDU7yS86h0myLDY"];
+$registration_passwords_picreader = ["juUmq6K4YJ8qRfPu", "eIgrSYDq3eW04qWk", "5ToNqKINAfHYraVU", "amYf5s0mBQh9daHE", "7xHu4SRuQqQ7rACt"];
+$registration_passwords_mutelist = ["LqvYOlwOJUH2VVSX", "jdA9VD9K769J2G2c", "7Al8a2woewg6c3Xo", "TD6rDvB5tRxZF001", "wD9jv0XzIgEp0Q5S"];
+$registration_passwords_avatarpicker = ["91DgoHwWHKEIwQo0", "YuEWBEToVws10FbI", "JYYeJoMg2lBco1Bb", "3oYJxqq1GGzRIqu9", "lPBGUNce7iaHK2m3"];
+$registration_passwords_economy = ["WpJB6hLw09E5nuxp", "Earxkfme3v3EdTqa", "wiltVbJTAytIIA01", "u9ZoPoKZi4EDAHFB", "04GuKwlyn0P9YO2q"];
+$registration_passwords_events = ["emOJSWOtwtzQYwXS", "1oWKdMknhOePQzvF", "KJhIHvQsk3FIUIlp", "JBN8b7cP3KPVaAk8", "60YWTW4CRGIAPyfp"];
 
 // Farben der Webseite
 // Website colors
