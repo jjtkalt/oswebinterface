@@ -65,8 +65,8 @@ Die Datei `env.php` enthält alle sensiblen Zugangsdaten und Umgebungsvariablen 
 
 ## Robust.ini Setup
 
-    MapTileURL = "${Const|BaseURL}:${Const|PublicPort}/oswebinterface/maptile.php";
-    SearchURL = "${Const|BaseURL}:${Const|PublicPort}/oswebinterface/searchservice.php";
+    MapTileURL = "${Const|BaseURL}/oswebinterface/maptile.php";
+    SearchURL = "${Const|BaseURL}/oswebinterface/search.php"
     DestinationGuide = "${Const|BaseURL}/oswebinterface/guide.php"
     AvatarPicker = "${Const|BaseURL}/oswebinterface/avatarpicker.php"
     GridSearch = "${Const|BaseURL}/oswebinterface/gridsearch.php";
@@ -78,8 +78,9 @@ Die Datei `env.php` enthält alle sensiblen Zugangsdaten und Umgebungsvariablen 
     help = ${Const|BaseURL}/oswebinterface/help.php
     password = ${Const|BaseURL}/oswebinterface/passwordreset.php
     partner = ${Const|BaseURL}/oswebinterface/partner.php
-    GridStatus = ${Const|BaseURL}:${Const|PublicPort}/oswebinterface/gridstatus.php
-    GridStatusRSS = ${Const|BaseURL}:${Const|PublicPort}/oswebinterface/gridstatusrss.php
+    GridStatus = ${Const|BaseURL}/oswebinterface/gridstatus.php
+    GridStatusRSS = ${Const|BaseURL}/oswebinterface/gridstatusrss.php
 
   ---
+
   
