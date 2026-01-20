@@ -33,7 +33,7 @@ Bitte konfigurieren sie Ihr osWebinterface wie folgt:
 
 config.example.php umbenennen in config.php und folgende Einträge anpassen:
 
-Die config.example.php (Config.php) wird in der Config.md ausführlich erklärt.
+Die config.example.php (Config.php) wird in der [Config.md](./Config.md) ausführlich erklärt.
 
 ## Env.php Setup
 
@@ -84,3 +84,4 @@ Die Datei `env.php` enthält alle sensiblen Zugangsdaten und Umgebungsvariablen 
   ---
 
   
+
