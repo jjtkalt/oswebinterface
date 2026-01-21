@@ -1,5 +1,7 @@
 # oswebinterface
 
+<img src="https://raw.githubusercontent.com/ManfredAabye/oswebinterface/refs/heads/main/include/oswebinterfaceK1.png" alt="Project Badge" width="680">
+
 **OpenSimulator Viewer Webinterface:**
 
 Dieses Webinterface dient ausschließlich dazu, die Kommunikationslücke zwischen dem OpenSimulator und dem Viewer/Client, wie beispielsweise Firestorm, zu schließen.
@@ -84,4 +86,5 @@ Die Datei `env.php` enthält alle sensiblen Zugangsdaten und Umgebungsvariablen 
   ---
 
   
+
 
