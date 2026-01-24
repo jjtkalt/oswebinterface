@@ -109,7 +109,8 @@ include_once "include/config.php";
                 $port = htmlspecialchars($dsatz["serverPort"]);
 
                 // Standard-Koordinaten für den Teleport-Link (X=103, Y=113, Z=23)
-                $regionslink = "hop://$ip:$port/$region/103/113/23";
+                $baseurl_clean = preg_replace('#^https?://#', '', BASE_URL);
+                $regionslink = "hop://" . $baseurl_clean . ":" . BASE_PORT . "/$region/103/113/23";
 
                 echo "<a class='region-link' href='$regionslink' target='_blank'>$region</a>";
             }
@@ -200,4 +201,3 @@ include_once "include/config.php";
 
 </bodysplash>
 </html>
-
