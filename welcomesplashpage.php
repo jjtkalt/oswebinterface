@@ -100,7 +100,7 @@ include_once "include/config.php";
             <legend>🌍 Regionen</legend>
             <?php
             $con = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-            $sql = "SELECT regionName, serverIP, serverPort FROM regions ORDER BY last_seen DESC LIMIT 10";
+            $sql = "SELECT regionName, serverIP, serverPort FROM regions ORDER BY last_seen DESC LIMIT 40";
             $resultregions = mysqli_query($con, $sql);
 
             while ($dsatz = mysqli_fetch_assoc($resultregions)) {
@@ -200,3 +200,4 @@ include_once "include/config.php";
 
 </bodysplash>
 </html>
+
