@@ -10,6 +10,7 @@ define('REMOTEADMIN_PORT', 8002); // Port des RemoteAdmin-Servers / Port of the 
 // Seitenadressen
 // Website addresses
 define('BASE_URL', 'http://yourdomain.com'); // Basis-URL der Webseite / Base URL of the website
+define('BASE_PORT', '8002'); // Port des Robust-Servers / Port of the Robust server
 define('SITE_NAME', 'Dein Grid Name'); // Name des Grids / Name of the grid
 
 // Konfigurationsoptionen Standard Template:
