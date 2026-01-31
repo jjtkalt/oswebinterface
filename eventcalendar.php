@@ -46,9 +46,22 @@
         let currentDate = new Date();
 
         async function fetchEvents() {
-            const response = await fetch('calendar/events.json');
-            const events = await response.json();
-            return events;
+            const year = currentDate.getFullYear();
+            let file = 'calendar/events.json';
+            if (year >= 2026 && year <= 2099) {
+                file = `calendar/events${year}.json`;
+            }
+            try {
+                const response = await fetch(file);
+                if (!response.ok) throw new Error('Not found');
+                const events = await response.json();
+                return events;
+            } catch (e) {
+                // Fallback auf Standarddatei, falls das Jahr nicht existiert
+                const response = await fetch('calendar/events.json');
+                const events = await response.json();
+                return events;
+            }
         }
 
         async function renderCalendar() {

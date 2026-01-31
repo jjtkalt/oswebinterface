@@ -100,7 +100,7 @@ include_once "include/config.php";
             <legend>🌍 Regions</legend>
             <?php
             $con = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-            $sql = "SELECT regionName, serverIP, serverPort FROM regions ORDER BY last_seen DESC LIMIT 10";
+            $sql = "SELECT regionName, serverIP, serverPort FROM regions ORDER BY last_seen DESC LIMIT 40";
             $resultregions = mysqli_query($con, $sql);
 
             while ($dsatz = mysqli_fetch_assoc($resultregions)) {
@@ -109,7 +109,8 @@ include_once "include/config.php";
                 $port = htmlspecialchars($dsatz["serverPort"]);
 
                 // Standard-Koordinaten für den Teleport-Link (X=103, Y=113, Z=23)
-                $regionslink = "hop://$ip:$port/$region/103/113/23";
+                $baseurl_clean = preg_replace('#^https?://#', '', BASE_URL);
+                $regionslink = "hop://" . $baseurl_clean . ":" . BASE_PORT . "/$region/103/113/23";
 
                 echo "<a class='region-link' href='$regionslink' target='_blank'>$region</a>";
             }

@@ -1,67 +1,74 @@
 # oswebinterface
 
-### German:
+<img src="https://raw.githubusercontent.com/ManfredAabye/oswebinterface/refs/heads/main/include/oswebinterfaceK1.png" alt="Project Badge" width="680">
+
 **OpenSimulator Viewer Webinterface:**
 
-Dieses Webinterface dient ausschließlich dazu, die Kommunikationslücke zwischen dem OpenSimulator und dem Viewer/Client, wie beispielsweise Firestorm, zu schließen. 
+Dieses Webinterface dient ausschließlich dazu, die Kommunikationslücke zwischen dem OpenSimulator und dem Viewer/Client, wie beispielsweise Firestorm, zu schließen.
 Es ermöglicht eine nahtlose Interaktion und erleichtert die Verwaltung und Steuerung der virtuellen Umgebung direkt über den Viewer.
 
-Das normale Webinterface wird in der Regel separat installiert und bietet zusätzliche Funktionen zur Verwaltung des OpenSimulator-Servers. 
-Mittlerweile gibt es hierfür einige ansprechende und benutzerfreundliche Lösungen, die die Administration und Konfiguration des Systems erheblich vereinfachen. 
+Das normale Webinterface wird in der Regel separat installiert und bietet zusätzliche Funktionen zur Verwaltung des OpenSimulator-Servers.
+Mittlerweile gibt es hierfür einige ansprechende und benutzerfreundliche Lösungen, die die Administration und Konfiguration des Systems erheblich vereinfachen.
 Diese Tools sind besonders nützlich für Benutzer, die keine tiefergehenden technischen Kenntnisse besitzen, aber dennoch effizient mit der Plattform arbeiten möchten.
 
 Für das osWebinterface ist keine Domain erforderlich – eine einfache IP-Adresse genügt, genau wie beim OpenSimulator selbst. Das Interface lässt sich ohnehin nicht direkt über einen normalen Aufruf im Browser öffnen.
 Natürlich wirkt eine eigene Domain ansprechender und professioneller, und sie ist heutzutage auch recht kostengünstig.
 Das osWebinterface wurde so gestaltet, dass es sich problemlos in gängige CMS-Systeme wie WordPress oder Joomla integrieren lässt – beispielsweise als Custom HTML Block, iFrame, Embed Block oder sogar als eigenständige Seite.
 
----
+## Installation Instructions
 
-### English:
-**OpenSimulator Viewer Webinterface:**  
+Bitte konfigurieren sie Ihr osWebinterface wie folgt:
 
-This web interface is exclusively designed to bridge the communication gap between OpenSimulator and the Viewer/Client, such as Firestorm.  
-It enables seamless interaction and simplifies the management and control of the virtual environment directly through the viewer.  
+  1. Laden Sie das oswebinterface in Ihr Webverzeichnis hoch (z.B. /var/www/oswebinterface).
+  2. Passen Sie die Konfigurationsdateien an Ihre Umgebung an.
+  3. Stellen Sie sicher, dass Ihr Webserver (Apache, Nginx, etc.) korrekt eingerichtet ist, um PHP-Dateien auszuführen.
+  4. Richten Sie die erforderlichen Berechtigungen für die Dateien und Verzeichnisse ein.
 
-The standard web interface is typically installed separately and offers additional functions for managing the OpenSimulator server.  
-By now, there are several appealing and user-friendly solutions available that significantly streamline the administration and configuration of the system.  
-These tools are particularly useful for users who do not have in-depth technical knowledge but still want to work efficiently with the platform.  
+    Folgende Dateien müssen angepasst werden:
+      oswebinterface/include/config.php
+      oswebinterface/include/env.php
+      opensim/bin/Robust.HG.ini
 
----
+ 5. Testen Sie das Interface, indem Sie die URL in Ihrem Browser aufrufen (z.B. <http://IhreDomainOderIP/oswebinterface/welcomesplashpage.php>).
 
-### Spanish:
-**Interfaz web del visor de OpenSimulator:**  
+## Config.php Setup
 
-Esta interfaz web está diseñada exclusivamente para cerrar la brecha de comunicación entre OpenSimulator y el visor, como por ejemplo Firestorm.  
-Permite una interacción fluida y facilita la gestión y el control del entorno virtual directamente a través del visor.  
+config.example.php umbenennen in config.php und folgende Einträge anpassen:
 
-La interfaz web normal generalmente se instala por separado y ofrece funciones adicionales para la administración del servidor de OpenSimulator.  
-Actualmente, existen varias soluciones atractivas y fáciles de usar que simplifican considerablemente la administración y configuración del sistema.  
-Estas herramientas son especialmente útiles para usuarios que no tienen conocimientos técnicos profundos, pero que desean trabajar de manera eficiente con la plataforma.  
+Die config.example.php (Config.php) wird in der [Config.md](./Config.md) ausführlich erklärt.
 
----
+## Env.php Setup
 
-### French:
-**Interface web du viewer OpenSimulator :**  
+Die Datei `env.php` enthält alle sensiblen Zugangsdaten und Umgebungsvariablen für das Webinterface. Sie sollte niemals öffentlich zugänglich sein!
 
-Cette interface web est exclusivement conçue pour combler le fossé de communication entre OpenSimulator et le viewer, tel que Firestorm.  
-Elle permet une interaction fluide et facilite la gestion et le contrôle de l'environnement virtuel directement via le viewer.  
+**Wichtige Einstellungen in env.php:**
 
-L'interface web standard est généralement installée séparément et offre des fonctionnalités supplémentaires pour la gestion du serveur OpenSimulator.  
-Aujourd'hui, il existe plusieurs solutions attrayantes et conviviales qui simplifient considérablement l'administration et la configuration du système.  
-Ces outils sont particulièrement utiles pour les utilisateurs qui ne possèdent pas de connaissances techniques approfondies, 
-mais qui souhaitent travailler efficacement avec la plateforme.
+- **DB_SERVER**: Adresse des Datenbankservers (meistens `localhost`).
+  > Beispiel: `'DB_SERVER', 'localhost'` – Nur ändern, wenn die Datenbank auf einem anderen Server läuft.
+- **DB_USERNAME**: Benutzername für die Datenbank.
+  > Beispiel: `'DB_USERNAME', 'dein_benutzer'` – Trage hier den MySQL/MariaDB-Benutzernamen ein.
+- **DB_PASSWORD**: Passwort für die Datenbank.
+  > Beispiel: `'DB_PASSWORD', 'dein_passwort'` – Das zugehörige Passwort zum Datenbankbenutzer.
+- **DB_NAME**: Name der Hauptdatenbank.
+  > Beispiel: `'DB_NAME', 'deine_datenbank'` – Hier steht der Name der OpenSim-Datenbank.
+- **DB_ASSET_NAME**: Name der Asset-Datenbank.
+  > Beispiel: `'DB_ASSET_NAME', 'deine_assetdatenbank'` – Kann identisch mit DB_NAME sein, wenn Assets in derselben Datenbank liegen.
 
-  ---
+- **REMOTEADMIN_HTTPAUTHUSERNAME**: Benutzername für die RemoteAdmin-HTTP-Authentifizierung.
+  > Beispiel: `'REMOTEADMIN_HTTPAUTHUSERNAME', 'opensim'` – Wird für die Kommunikation mit dem OpenSim-Server benötigt.
+- **REMOTEADMIN_HTTPAUTHPASSWORD**: Passwort für die RemoteAdmin-HTTP-Authentifizierung.
+  > Beispiel: `'REMOTEADMIN_HTTPAUTHPASSWORD', 'opensim123'` – Unbedingt ein sicheres Passwort wählen!
 
-    Setup oswebinterface/include/config.php
-    Setup oswebinterface/include/env.php
-    Setup opensim/bin/Robust.HG.ini
+**Hinweise:**
 
-  ---
-## Robust Setup
+- Nach dem Anpassen der Werte die Datei speichern und die Rechte so setzen, dass sie nicht öffentlich im Web erreichbar ist (z.B. chmod 600).
+- Die Zugangsdaten müssen mit denen in der OpenSim-Konfiguration übereinstimmen.
+- Bei Problemen mit der Datenbankverbindung prüfe Benutzername, Passwort und Serveradresse.
 
-    MapTileURL = "${Const|BaseURL}:${Const|PublicPort}/oswebinterface/maptile.php";
-    SearchURL = "${Const|BaseURL}:${Const|PublicPort}/oswebinterface/searchservice.php";
+## Robust.ini Setup
+
+    MapTileURL = "${Const|BaseURL}/oswebinterface/maptile.php";
+    SearchURL = "${Const|BaseURL}/oswebinterface/search.php"
     DestinationGuide = "${Const|BaseURL}/oswebinterface/guide.php"
     AvatarPicker = "${Const|BaseURL}/oswebinterface/avatarpicker.php"
     GridSearch = "${Const|BaseURL}/oswebinterface/gridsearch.php";
@@ -73,8 +80,11 @@ mais qui souhaitent travailler efficacement avec la plateforme.
     help = ${Const|BaseURL}/oswebinterface/help.php
     password = ${Const|BaseURL}/oswebinterface/passwordreset.php
     partner = ${Const|BaseURL}/oswebinterface/partner.php
-    GridStatus = ${Const|BaseURL}:${Const|PublicPort}/oswebinterface/gridstatus.php
-    GridStatusRSS = ${Const|BaseURL}:${Const|PublicPort}/oswebinterface/gridstatusrss.php
+    GridStatus = ${Const|BaseURL}/oswebinterface/gridstatus.php
+    GridStatusRSS = ${Const|BaseURL}/oswebinterface/gridstatusrss.php
 
   ---
+
   
+
+
